@@ -1,0 +1,1645 @@
+openapi: 3.0.0
+info:
+  title: Rhandzu Bakery API
+  version: 1.0.0
+  description: API documentation for the Rhandzu Bakery backend
+
+servers:
+  - url: http://localhost:3000/api
+
+tags:
+  - name: Users
+  - name: Suppliers
+  - name: Ingredients
+  - name: PurchaseOrders
+  - name: PurchaseOrderItems
+  - name: GRVs
+  - name: GRVItems
+  - name: StockLedgers
+  - name: ProductionBatches
+  - name: ProductionBatchIngredients
+  - name: Drivers
+  - name: Trucks
+  - name: DriverDeliveries
+  - name: DriverDeliveryItems
+  - name: DieselLogs
+  - name: Expenses
+  - name: Customers
+  - name: CustomerPriceLists
+  - name: Invoices
+  - name: InvoiceItems
+  - name: Payments
+  - name: AuditLogs
+  - name: Formulas
+  - name: FormulaIngredients
+
+paths:
+  /users:
+    get:
+      {
+        tags: [Users],
+        summary: Get all users,
+        responses: { "200": { description: List of users } },
+      }
+    post:
+      tags: [Users]
+      summary: Create a user
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/User" } },
+            },
+        }
+      responses: { "201": { description: User created } }
+  /users/{id}:
+    get:
+      {
+        tags: [Users],
+        summary: Get a user by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: User found },
+            "404": { description: User not found },
+          },
+      }
+    put:
+      tags: [Users]
+      summary: Update a user
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/User" } },
+            },
+        }
+      responses: { "200": { description: User updated } }
+    delete:
+      {
+        tags: [Users],
+        summary: Delete a user,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: User deleted } },
+      }
+
+  /suppliers:
+    get:
+      {
+        tags: [Suppliers],
+        summary: Get all suppliers,
+        responses: { "200": { description: List of suppliers } },
+      }
+    post:
+      tags: [Suppliers]
+      summary: Create a supplier
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Supplier" } },
+            },
+        }
+      responses: { "201": { description: Supplier created } }
+  /suppliers/{id}:
+    get:
+      {
+        tags: [Suppliers],
+        summary: Get a supplier by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Supplier found },
+            "404": { description: Supplier not found },
+          },
+      }
+    put:
+      tags: [Suppliers]
+      summary: Update a supplier
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Supplier" } },
+            },
+        }
+      responses: { "200": { description: Supplier updated } }
+    delete:
+      {
+        tags: [Suppliers],
+        summary: Delete a supplier,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Supplier deleted } },
+      }
+
+  /ingredients:
+    get:
+      {
+        tags: [Ingredients],
+        summary: Get all ingredients,
+        responses: { "200": { description: List of ingredients } },
+      }
+    post:
+      tags: [Ingredients]
+      summary: Create an ingredient
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Ingredient" } },
+            },
+        }
+      responses: { "201": { description: Ingredient created } }
+  /ingredients/{id}:
+    get:
+      {
+        tags: [Ingredients],
+        summary: Get an ingredient by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Ingredient found },
+            "404": { description: Ingredient not found },
+          },
+      }
+    put:
+      tags: [Ingredients]
+      summary: Update an ingredient
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Ingredient" } },
+            },
+        }
+      responses: { "200": { description: Ingredient updated } }
+    delete:
+      {
+        tags: [Ingredients],
+        summary: Delete an ingredient,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Ingredient deleted } },
+      }
+
+  /purchase-orders:
+    get:
+      {
+        tags: [PurchaseOrders],
+        summary: Get all purchase orders,
+        responses: { "200": { description: List of purchase orders } },
+      }
+    post:
+      tags: [PurchaseOrders]
+      summary: Create a purchase order
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/PurchaseOrder" } },
+            },
+        }
+      responses: { "201": { description: Purchase order created } }
+  /purchase-orders/{id}:
+    get:
+      {
+        tags: [PurchaseOrders],
+        summary: Get a purchase order by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Purchase order found },
+            "404": { description: Purchase order not found },
+          },
+      }
+    put:
+      tags: [PurchaseOrders]
+      summary: Update a purchase order
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/PurchaseOrder" } },
+            },
+        }
+      responses: { "200": { description: Purchase order updated } }
+    delete:
+      {
+        tags: [PurchaseOrders],
+        summary: Delete a purchase order,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Purchase order deleted } },
+      }
+
+  /purchase-order-items:
+    get:
+      {
+        tags: [PurchaseOrderItems],
+        summary: Get all purchase order items,
+        responses: { "200": { description: List of purchase order items } },
+      }
+    post:
+      tags: [PurchaseOrderItems]
+      summary: Create a purchase order item
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/PurchaseOrderItem" } },
+            },
+        }
+      responses: { "201": { description: Purchase order item created } }
+  /purchase-order-items/{id}:
+    get:
+      {
+        tags: [PurchaseOrderItems],
+        summary: Get a purchase order item by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Purchase order item found },
+            "404": { description: Purchase order item not found },
+          },
+      }
+    put:
+      tags: [PurchaseOrderItems]
+      summary: Update a purchase order item
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/PurchaseOrderItem" } },
+            },
+        }
+      responses: { "200": { description: Purchase order item updated } }
+    delete:
+      {
+        tags: [PurchaseOrderItems],
+        summary: Delete a purchase order item,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Purchase order item deleted } },
+      }
+
+  /grvs:
+    get:
+      {
+        tags: [GRVs],
+        summary: Get all GRVs,
+        responses: { "200": { description: List of GRVs } },
+      }
+    post:
+      tags: [GRVs]
+      summary: Create a GRV
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/GRV" } },
+            },
+        }
+      responses: { "201": { description: GRV created } }
+  /grvs/{id}:
+    get:
+      {
+        tags: [GRVs],
+        summary: Get a GRV by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: GRV found },
+            "404": { description: GRV not found },
+          },
+      }
+    put:
+      tags: [GRVs]
+      summary: Update a GRV
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/GRV" } },
+            },
+        }
+      responses: { "200": { description: GRV updated } }
+    delete:
+      {
+        tags: [GRVs],
+        summary: Delete a GRV,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: GRV deleted } },
+      }
+
+  /grv-items:
+    get:
+      {
+        tags: [GRVItems],
+        summary: Get all GRV items,
+        responses: { "200": { description: List of GRV items } },
+      }
+    post:
+      tags: [GRVItems]
+      summary: Create a GRV item
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/GRVItem" } },
+            },
+        }
+      responses: { "201": { description: GRV item created } }
+  /grv-items/{id}:
+    get:
+      {
+        tags: [GRVItems],
+        summary: Get a GRV item by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: GRV item found },
+            "404": { description: GRV item not found },
+          },
+      }
+    put:
+      tags: [GRVItems]
+      summary: Update a GRV item
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/GRVItem" } },
+            },
+        }
+      responses: { "200": { description: GRV item updated } }
+    delete:
+      {
+        tags: [GRVItems],
+        summary: Delete a GRV item,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: GRV item deleted } },
+      }
+
+  /stock-ledgers:
+    get:
+      {
+        tags: [StockLedgers],
+        summary: Get all stock ledgers,
+        responses: { "200": { description: List of stock ledgers } },
+      }
+    post:
+      tags: [StockLedgers]
+      summary: Create a stock ledger entry
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/StockLedger" } },
+            },
+        }
+      responses: { "201": { description: Stock ledger entry created } }
+  /stock-ledgers/{id}:
+    get:
+      {
+        tags: [StockLedgers],
+        summary: Get a stock ledger entry by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Stock ledger entry found },
+            "404": { description: Stock ledger entry not found },
+          },
+      }
+    put:
+      tags: [StockLedgers]
+      summary: Update a stock ledger entry
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/StockLedger" } },
+            },
+        }
+      responses: { "200": { description: Stock ledger entry updated } }
+    delete:
+      {
+        tags: [StockLedgers],
+        summary: Delete a stock ledger entry,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Stock ledger entry deleted } },
+      }
+
+  /production-batches:
+    get:
+      {
+        tags: [ProductionBatches],
+        summary: Get all production batches,
+        responses: { "200": { description: List of production batches } },
+      }
+    post:
+      tags: [ProductionBatches]
+      summary: Create a production batch
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/ProductionBatch" } },
+            },
+        }
+      responses: { "201": { description: Production batch created } }
+  /production-batches/{id}:
+    get:
+      {
+        tags: [ProductionBatches],
+        summary: Get a production batch by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Production batch found },
+            "404": { description: Production batch not found },
+          },
+      }
+    put:
+      tags: [ProductionBatches]
+      summary: Update a production batch
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/ProductionBatch" } },
+            },
+        }
+      responses: { "200": { description: Production batch updated } }
+    delete:
+      {
+        tags: [ProductionBatches],
+        summary: Delete a production batch,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Production batch deleted } },
+      }
+
+  /production-batch-ingredients:
+    get:
+      {
+        tags: [ProductionBatchIngredients],
+        summary: Get all production batch ingredients,
+        responses:
+          { "200": { description: List of production batch ingredients } },
+      }
+    post:
+      tags: [ProductionBatchIngredients]
+      summary: Create a production batch ingredient
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                {
+                  schema:
+                    { $ref: "#/components/schemas/ProductionBatchIngredient" },
+                },
+            },
+        }
+      responses: { "201": { description: Production batch ingredient created } }
+  /production-batch-ingredients/{id}:
+    get:
+      {
+        tags: [ProductionBatchIngredients],
+        summary: Get a production batch ingredient by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Production batch ingredient found },
+            "404": { description: Production batch ingredient not found },
+          },
+      }
+    put:
+      tags: [ProductionBatchIngredients]
+      summary: Update a production batch ingredient
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                {
+                  schema:
+                    { $ref: "#/components/schemas/ProductionBatchIngredient" },
+                },
+            },
+        }
+      responses: { "200": { description: Production batch ingredient updated } }
+    delete:
+      {
+        tags: [ProductionBatchIngredients],
+        summary: Delete a production batch ingredient,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          { "200": { description: Production batch ingredient deleted } },
+      }
+
+  /drivers:
+    get:
+      {
+        tags: [Drivers],
+        summary: Get all drivers,
+        responses: { "200": { description: List of drivers } },
+      }
+    post:
+      tags: [Drivers]
+      summary: Create a driver
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Driver" } },
+            },
+        }
+      responses: { "201": { description: Driver created } }
+  /drivers/{id}:
+    get:
+      {
+        tags: [Drivers],
+        summary: Get a driver by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Driver found },
+            "404": { description: Driver not found },
+          },
+      }
+    put:
+      tags: [Drivers]
+      summary: Update a driver
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Driver" } },
+            },
+        }
+      responses: { "200": { description: Driver updated } }
+    delete:
+      {
+        tags: [Drivers],
+        summary: Delete a driver,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Driver deleted } },
+      }
+
+  /trucks:
+    get:
+      {
+        tags: [Trucks],
+        summary: Get all trucks,
+        responses: { "200": { description: List of trucks } },
+      }
+    post:
+      tags: [Trucks]
+      summary: Create a truck
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Truck" } },
+            },
+        }
+      responses: { "201": { description: Truck created } }
+  /trucks/{id}:
+    get:
+      {
+        tags: [Trucks],
+        summary: Get a truck by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Truck found },
+            "404": { description: Truck not found },
+          },
+      }
+    put:
+      tags: [Trucks]
+      summary: Update a truck
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Truck" } },
+            },
+        }
+      responses: { "200": { description: Truck updated } }
+    delete:
+      {
+        tags: [Trucks],
+        summary: Delete a truck,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Truck deleted } },
+      }
+
+  /driver-deliveries:
+    get:
+      {
+        tags: [DriverDeliveries],
+        summary: Get all driver deliveries,
+        responses: { "200": { description: List of driver deliveries } },
+      }
+    post:
+      tags: [DriverDeliveries]
+      summary: Create a driver delivery
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/DriverDelivery" } },
+            },
+        }
+      responses: { "201": { description: Driver delivery created } }
+  /driver-deliveries/{id}:
+    get:
+      {
+        tags: [DriverDeliveries],
+        summary: Get a driver delivery by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Driver delivery found },
+            "404": { description: Driver delivery not found },
+          },
+      }
+    put:
+      tags: [DriverDeliveries]
+      summary: Update a driver delivery
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/DriverDelivery" } },
+            },
+        }
+      responses: { "200": { description: Driver delivery updated } }
+    delete:
+      {
+        tags: [DriverDeliveries],
+        summary: Delete a driver delivery,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Driver delivery deleted } },
+      }
+
+  /driver-delivery-items:
+    get:
+      {
+        tags: [DriverDeliveryItems],
+        summary: Get all driver delivery items,
+        responses: { "200": { description: List of driver delivery items } },
+      }
+    post:
+      tags: [DriverDeliveryItems]
+      summary: Create a driver delivery item
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/DriverDeliveryItem" } },
+            },
+        }
+      responses: { "201": { description: Driver delivery item created } }
+  /driver-delivery-items/{id}:
+    get:
+      {
+        tags: [DriverDeliveryItems],
+        summary: Get a driver delivery item by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Driver delivery item found },
+            "404": { description: Driver delivery item not found },
+          },
+      }
+    put:
+      tags: [DriverDeliveryItems]
+      summary: Update a driver delivery item
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/DriverDeliveryItem" } },
+            },
+        }
+      responses: { "200": { description: Driver delivery item updated } }
+    delete:
+      {
+        tags: [DriverDeliveryItems],
+        summary: Delete a driver delivery item,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Driver delivery item deleted } },
+      }
+
+  /diesel-logs:
+    get:
+      {
+        tags: [DieselLogs],
+        summary: Get all diesel logs,
+        responses: { "200": { description: List of diesel logs } },
+      }
+    post:
+      tags: [DieselLogs]
+      summary: Create a diesel log
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/DieselLog" } },
+            },
+        }
+      responses: { "201": { description: Diesel log created } }
+  /diesel-logs/{id}:
+    get:
+      {
+        tags: [DieselLogs],
+        summary: Get a diesel log by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Diesel log found },
+            "404": { description: Diesel log not found },
+          },
+      }
+    put:
+      tags: [DieselLogs]
+      summary: Update a diesel log
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/DieselLog" } },
+            },
+        }
+      responses: { "200": { description: Diesel log updated } }
+    delete:
+      {
+        tags: [DieselLogs],
+        summary: Delete a diesel log,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Diesel log deleted } },
+      }
+
+  /expenses:
+    get:
+      {
+        tags: [Expenses],
+        summary: Get all expenses,
+        responses: { "200": { description: List of expenses } },
+      }
+    post:
+      tags: [Expenses]
+      summary: Create an expense
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Expense" } },
+            },
+        }
+      responses: { "201": { description: Expense created } }
+  /expenses/{id}:
+    get:
+      {
+        tags: [Expenses],
+        summary: Get an expense by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Expense found },
+            "404": { description: Expense not found },
+          },
+      }
+    put:
+      tags: [Expenses]
+      summary: Update an expense
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Expense" } },
+            },
+        }
+      responses: { "200": { description: Expense updated } }
+    delete:
+      {
+        tags: [Expenses],
+        summary: Delete an expense,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Expense deleted } },
+      }
+
+  /customers:
+    get:
+      {
+        tags: [Customers],
+        summary: Get all customers,
+        responses: { "200": { description: List of customers } },
+      }
+    post:
+      tags: [Customers]
+      summary: Create a customer
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Customer" } },
+            },
+        }
+      responses: { "201": { description: Customer created } }
+  /customers/{id}:
+    get:
+      {
+        tags: [Customers],
+        summary: Get a customer by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Customer found },
+            "404": { description: Customer not found },
+          },
+      }
+    put:
+      tags: [Customers]
+      summary: Update a customer
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Customer" } },
+            },
+        }
+      responses: { "200": { description: Customer updated } }
+    delete:
+      {
+        tags: [Customers],
+        summary: Delete a customer,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Customer deleted } },
+      }
+
+  /customer-price-lists:
+    get:
+      {
+        tags: [CustomerPriceLists],
+        summary: Get all customer price lists,
+        responses: { "200": { description: List of customer price lists } },
+      }
+    post:
+      tags: [CustomerPriceLists]
+      summary: Create a customer price list
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/CustomerPriceList" } },
+            },
+        }
+      responses: { "201": { description: Customer price list created } }
+  /customer-price-lists/{id}:
+    get:
+      {
+        tags: [CustomerPriceLists],
+        summary: Get a customer price list by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Customer price list found },
+            "404": { description: Customer price list not found },
+          },
+      }
+    put:
+      tags: [CustomerPriceLists]
+      summary: Update a customer price list
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/CustomerPriceList" } },
+            },
+        }
+      responses: { "200": { description: Customer price list updated } }
+    delete:
+      {
+        tags: [CustomerPriceLists],
+        summary: Delete a customer price list,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Customer price list deleted } },
+      }
+
+  /invoices:
+    get:
+      {
+        tags: [Invoices],
+        summary: Get all invoices,
+        responses: { "200": { description: List of invoices } },
+      }
+    post:
+      tags: [Invoices]
+      summary: Create an invoice
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Invoice" } },
+            },
+        }
+      responses: { "201": { description: Invoice created } }
+  /invoices/{id}:
+    get:
+      {
+        tags: [Invoices],
+        summary: Get an invoice by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Invoice found },
+            "404": { description: Invoice not found },
+          },
+      }
+    put:
+      tags: [Invoices]
+      summary: Update an invoice
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Invoice" } },
+            },
+        }
+      responses: { "200": { description: Invoice updated } }
+    delete:
+      {
+        tags: [Invoices],
+        summary: Delete an invoice,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Invoice deleted } },
+      }
+
+  /invoice-items:
+    get:
+      {
+        tags: [InvoiceItems],
+        summary: Get all invoice items,
+        responses: { "200": { description: List of invoice items } },
+      }
+    post:
+      tags: [InvoiceItems]
+      summary: Create an invoice item
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/InvoiceItem" } },
+            },
+        }
+      responses: { "201": { description: Invoice item created } }
+  /invoice-items/{id}:
+    get:
+      {
+        tags: [InvoiceItems],
+        summary: Get an invoice item by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Invoice item found },
+            "404": { description: Invoice item not found },
+          },
+      }
+    put:
+      tags: [InvoiceItems]
+      summary: Update an invoice item
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/InvoiceItem" } },
+            },
+        }
+      responses: { "200": { description: Invoice item updated } }
+    delete:
+      {
+        tags: [InvoiceItems],
+        summary: Delete an invoice item,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Invoice item deleted } },
+      }
+
+  /payments:
+    get:
+      {
+        tags: [Payments],
+        summary: Get all payments,
+        responses: { "200": { description: List of payments } },
+      }
+    post:
+      tags: [Payments]
+      summary: Create a payment
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Payment" } },
+            },
+        }
+      responses: { "201": { description: Payment created } }
+  /payments/{id}:
+    get:
+      {
+        tags: [Payments],
+        summary: Get a payment by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Payment found },
+            "404": { description: Payment not found },
+          },
+      }
+    put:
+      tags: [Payments]
+      summary: Update a payment
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Payment" } },
+            },
+        }
+      responses: { "200": { description: Payment updated } }
+    delete:
+      {
+        tags: [Payments],
+        summary: Delete a payment,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Payment deleted } },
+      }
+
+  /audit-logs:
+    get:
+      {
+        tags: [AuditLogs],
+        summary: Get all audit logs,
+        responses: { "200": { description: List of audit logs } },
+      }
+    post:
+      tags: [AuditLogs]
+      summary: Create an audit log
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/AuditLog" } },
+            },
+        }
+      responses: { "201": { description: Audit log created } }
+  /audit-logs/{id}:
+    get:
+      {
+        tags: [AuditLogs],
+        summary: Get an audit log by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Audit log found },
+            "404": { description: Audit log not found },
+          },
+      }
+    put:
+      tags: [AuditLogs]
+      summary: Update an audit log
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/AuditLog" } },
+            },
+        }
+      responses: { "200": { description: Audit log updated } }
+    delete:
+      {
+        tags: [AuditLogs],
+        summary: Delete an audit log,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Audit log deleted } },
+      }
+
+  /formulas:
+    get:
+      {
+        tags: [Formulas],
+        summary: Get all formulas,
+        responses: { "200": { description: List of formulas } },
+      }
+    post:
+      tags: [Formulas]
+      summary: Create a formula
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Formula" } },
+            },
+        }
+      responses: { "201": { description: Formula created } }
+  /formulas/{id}:
+    get:
+      {
+        tags: [Formulas],
+        summary: Get a formula by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Formula found },
+            "404": { description: Formula not found },
+          },
+      }
+    put:
+      tags: [Formulas]
+      summary: Update a formula
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/Formula" } },
+            },
+        }
+      responses: { "200": { description: Formula updated } }
+    delete:
+      {
+        tags: [Formulas],
+        summary: Delete a formula,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Formula deleted } },
+      }
+
+  /formula-ingredients:
+    get:
+      {
+        tags: [FormulaIngredients],
+        summary: Get all formula ingredients,
+        responses: { "200": { description: List of formula ingredients } },
+      }
+    post:
+      tags: [FormulaIngredients]
+      summary: Create a formula ingredient
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/FormulaIngredient" } },
+            },
+        }
+      responses: { "201": { description: Formula ingredient created } }
+  /formula-ingredients/{id}:
+    get:
+      {
+        tags: [FormulaIngredients],
+        summary: Get a formula ingredient by ID,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses:
+          {
+            "200": { description: Formula ingredient found },
+            "404": { description: Formula ingredient not found },
+          },
+      }
+    put:
+      tags: [FormulaIngredients]
+      summary: Update a formula ingredient
+      parameters:
+        [{ in: path, name: id, required: true, schema: { type: string } }]
+      requestBody:
+        {
+          required: true,
+          content:
+            {
+              application/json:
+                { schema: { $ref: "#/components/schemas/FormulaIngredient" } },
+            },
+        }
+      responses: { "200": { description: Formula ingredient updated } }
+    delete:
+      {
+        tags: [FormulaIngredients],
+        summary: Delete a formula ingredient,
+        parameters:
+          [{ in: path, name: id, required: true, schema: { type: string } }],
+        responses: { "200": { description: Formula ingredient deleted } },
+      }
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        username: { type: string }
+        password_hash: { type: string }
+        email: { type: string }
+        role: { type: string }
+        first_name: { type: string }
+        last_name: { type: string }
+    Supplier:
+      type: object
+      properties:
+        supplier_name: { type: string }
+        address: { type: string }
+        contact_person: { type: string }
+        phone_number: { type: string }
+        email: { type: string }
+        payment_status: { type: string }
+    Ingredient:
+      type: object
+      properties:
+        item_name: { type: string }
+        category: { type: string }
+        unit_of_measure: { type: string }
+        unit_cost: { type: number }
+        reorder_level: { type: number }
+        alert_threshold: { type: number }
+        batch_tracking_enabled: { type: boolean }
+        expiry_tracking_enabled: { type: boolean }
+    PurchaseOrder:
+      type: object
+      properties:
+        supplier_id: { type: string }
+        order_date: { type: string, format: date }
+        status: { type: string }
+        created_by_user_id: { type: string }
+    PurchaseOrderItem:
+      type: object
+      properties:
+        po_id: { type: string }
+        item_id: { type: string }
+        quantity_ordered: { type: number }
+        unit_cost_at_order: { type: number }
+    GRV:
+      type: object
+      properties:
+        po_id: { type: string }
+        supplier_id: { type: string }
+        delivery_date: { type: string, format: date }
+        received_by_user_id: { type: string }
+        is_backdated: { type: boolean }
+        backdate_reason: { type: string }
+        status: { type: string }
+    GRVItem:
+      type: object
+      properties:
+        grv_id: { type: string }
+        item_id: { type: string }
+        quantity_received: { type: number }
+        discrepancy_flag: { type: boolean }
+        discrepancy_details: { type: string }
+    StockLedger:
+      type: object
+      properties:
+        item_id: { type: string }
+        transaction_type: { type: string }
+        quantity_change: { type: number }
+        date_of_transaction: { type: string, format: date }
+        cost_per_unit_at_transaction: { type: number }
+        user_id: { type: string }
+    ProductionBatch:
+      type: object
+      properties:
+        production_date: { type: string, format: date }
+        number_of_bakes: { type: number }
+        formula_used: { type: string }
+        production_manager_user_id: { type: string }
+        output_loaves: { type: number }
+        shift: { type: string }
+        bakery_damages: { type: number }
+    ProductionBatchIngredient:
+      type: object
+      properties:
+        production_batch_id: { type: string }
+        item_id: { type: string }
+        quantity_used: { type: number }
+    Driver:
+      type: object
+      properties:
+        driver_name: { type: string }
+        employee_id: { type: string }
+        commission_rate_per_loaf: { type: number }
+    Truck:
+      type: object
+      properties:
+        truck_number: { type: string }
+        license_plate: { type: string }
+        route_assigned: { type: string }
+    DriverDelivery:
+      type: object
+      properties:
+        driver_id: { type: string }
+        truck_id: { type: string }
+        delivery_date: { type: string, format: date }
+        route_name: { type: string }
+        total_loaves_loaded: { type: number }
+        total_loaves_returned: { type: number }
+        expected_revenue: { type: number }
+        actual_cash_received: { type: number }
+        discrepancy_alert: { type: boolean }
+        finance_officer_user_id: { type: string }
+    DriverDeliveryItem:
+      type: object
+      properties:
+        delivery_id: { type: string }
+        bread_type: { type: string }
+        quantity_loaded: { type: number }
+        quantity_returned: { type: number }
+        unit_price: { type: number }
+        quantity_sold: { type: number }
+        revenue_for_type: { type: number }
+        commission_earned: { type: number }
+        is_damaged: { type: boolean }
+        is_shortage: { type: boolean }
+    DieselLog:
+      type: object
+      properties:
+        date_of_issue: { type: string, format: date }
+        driver_id: { type: string }
+        truck_id: { type: string }
+        route_or_destination: { type: string }
+        litres_issued: { type: number }
+        diesel_price_per_litre: { type: number }
+        total_cost: { type: number }
+        notes: { type: string }
+        captured_by_user_id: { type: string }
+        linked_delivery_id: { type: string }
+    Expense:
+      type: object
+      properties:
+        date_of_expense: { type: string, format: date }
+        description: { type: string }
+        amount: { type: number }
+        payment_method: { type: string }
+        supplier_name: { type: string }
+        expense_category: { type: string }
+        sub_category: { type: string }
+        branch_id: { type: string }
+        truck_id: { type: string }
+        recorded_by_user_id: { type: string }
+        receipt_attachment_path: { type: string }
+        is_flagged_for_review: { type: boolean }
+    Customer:
+      type: object
+      properties:
+        customer_code: { type: string }
+        full_name_or_business_name: { type: string }
+        customer_type: { type: string }
+        contact_person: { type: string }
+        phone_number: { type: string }
+        delivery_address: { type: string }
+        area: { type: string }
+        route_id: { type: string }
+        payment_terms: { type: string }
+        opening_balance: { type: number }
+        notes: { type: string }
+        is_inactive: { type: boolean }
+    CustomerPriceList:
+      type: object
+      properties:
+        customer_id: { type: string }
+        item_id: { type: string }
+        unit_price: { type: number }
+        discount_percentage: { type: number }
+    Invoice:
+      type: object
+      properties:
+        invoice_number: { type: string }
+        customer_id: { type: string }
+        delivery_date: { type: string, format: date }
+        driver_id: { type: string }
+        delivery_route: { type: string }
+        payment_status: { type: string }
+        payment_method: { type: string }
+        total_amount: { type: number }
+        discount_amount: { type: number }
+        notes_or_reference: { type: string }
+        created_by_user_id: { type: string }
+        approved_by_user_id: { type: string }
+        linked_delivery_id: { type: string }
+        is_auto_generated: { type: boolean }
+    InvoiceItem:
+      type: object
+      properties:
+        invoice_id: { type: string }
+        item_id: { type: string }
+        quantity: { type: number }
+        unit_price_at_sale: { type: number }
+        line_total: { type: number }
+        is_return: { type: boolean }
+        is_damage: { type: boolean }
+    Payment:
+      type: object
+      properties:
+        invoice_id: { type: string }
+        payment_date: { type: string, format: date }
+        amount_paid: { type: number }
+        payment_method: { type: string }
+        recorded_by_user_id: { type: string }
+    AuditLog:
+      type: object
+      properties:
+        user_id: { type: string }
+        action_type: { type: string }
+        table_name: { type: string }
+        record_id: { type: number }
+        old_values: {}
+        new_values: {}
+        timestamp: { type: string, format: date-time }
+    Formula:
+      type: object
+      properties:
+        formula_name: { type: string }
+        description: { type: string }
+    FormulaIngredient:
+      type: object
+      properties:
+        formula_id: { type: string }
+        item_id: { type: string }
+        quantity_per_bake: { type: number }
+        unit_of_measure: { type: string }
