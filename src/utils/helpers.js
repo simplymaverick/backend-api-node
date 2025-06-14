@@ -15,8 +15,16 @@ const comparePasswords = async (password, hash) => {
 };
 
 // Function to generate JWT tokens
+// const generateToken = (user) => {
+//     const token = jwt.sign({ id: user.user_id, role: user.role }, process.env.JWT_SECRET, {
+//         expiresIn: '1h',
+//     });
+//     return token;
+// };
+
+// Temp Function to generate 'JWT' tokens
 const generateToken = (user) => {
-    const token = jwt.sign({ id: user.user_id, role: user.role }, process.env.JWT_SECRET, {
+    const token = ({ id: user.user_id, role: user.role }, {
         expiresIn: '1h',
     });
     return token;

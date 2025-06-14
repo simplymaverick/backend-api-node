@@ -1,9 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./routes/index');
-
+const auth = require('./controllers/auth');
 const app = express();
-
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
@@ -13,8 +12,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
+app.use('/api/auth', auth);
 app.use('/api', routes);
-
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Error handling
