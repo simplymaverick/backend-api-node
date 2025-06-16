@@ -33,7 +33,13 @@ router.post('/', async (req, res) => {
 // Read all
 router.get('/', async (req, res) => {
     try {
-        const snapshot = await db.collection('formulas').get();
+        const { name } = req.query;
+        let snapshot;
+        if (name) {
+            snapshot = await db.collection('formulas').where('formula_name', '==', name).get();
+        } else {
+            snapshot = await db.collection('formulas').get();
+        }
         const formulas = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         res.json(formulas);
     } catch (err) {

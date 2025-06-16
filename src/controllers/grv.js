@@ -25,12 +25,13 @@ router.post('/', async (req, res) => {
     }
     try {
         const grvData = {
-            po_id: req.body.po_id || null,
+            po_number: req.body.po_number || null,
             supplier_id: req.body.supplier_id,
+            items_recieved: req.body.items_received || [],
             delivery_date: req.body.delivery_date ? new Date(req.body.delivery_date) : new Date(),
+            is_backdated: req.body.is_backdated || false,
             received_by_user_id: req.body.received_by_user_id,
-            is_backdated: typeof req.body.is_backdated === 'boolean' ? req.body.is_backdated : false,
-            backdate_reason: req.body.backdate_reason || '',
+            backdate_reason: req.body.backdate_reason || null,
             status: req.body.status || 'Received',
             created_at: new Date(),
             updated_at: new Date()
@@ -72,13 +73,16 @@ router.put('/:id', async (req, res) => {
     }
     try {
         const grvData = {
-            po_id: req.body.po_id || null,
+
+            po_number: req.body.po_number || null,
             supplier_id: req.body.supplier_id,
+            items_recieved: req.body.items_received || [],
             delivery_date: req.body.delivery_date ? new Date(req.body.delivery_date) : new Date(),
+            is_backdated: req.body.is_backdated || false,
             received_by_user_id: req.body.received_by_user_id,
-            is_backdated: typeof req.body.is_backdated === 'boolean' ? req.body.is_backdated : false,
-            backdate_reason: req.body.backdate_reason || '',
+            backdate_reason: req.body.backdate_reason || null,
             status: req.body.status || 'Received',
+            created_at: new Date(),
             updated_at: new Date()
         };
         await db.collection('grvs').doc(req.params.id).update(grvData);

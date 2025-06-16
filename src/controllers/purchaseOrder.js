@@ -28,7 +28,8 @@ router.post('/', async (req, res) => {
             supplier_id: req.body.supplier_id,
             order_date: req.body.order_date ? new Date(req.body.order_date) : new Date(),
             status: req.body.status,
-            prepared_by_user_id: req.body.prepared_by_user_id,
+            total_amount: req.body.total_amount || 0,
+            items: req.body.items || [],
             created_at: new Date(),
             updated_at: new Date()
         };
@@ -73,7 +74,8 @@ router.put('/:id', async (req, res) => {
             supplier_id: req.body.supplier_id,
             order_date: req.body.order_date ? new Date(req.body.order_date) : new Date(),
             status: req.body.status,
-            prepared_by_user_id: req.body.prepared_by_user_id,
+            total_amount: req.body.total_amount || 0,
+            items: req.body.items || [],
             updated_at: new Date()
         };
         await db.collection('purchase_orders').doc(req.params.id).update(orderData);
